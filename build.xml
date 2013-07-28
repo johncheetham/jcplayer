@@ -1,0 +1,80 @@
+<project name="JCPlayer" default="build" basedir=".">
+
+   <!-- Clean -->
+   <target name="clean" description="Clean">
+	<delete dir="classes/uk" />
+	<delete file="JCPlayer.jar" />	
+   </target>
+	
+  <!-- Initializations -->
+  <target name="init">
+    <echo message="---------------------------------------------------------"/>
+    <echo message="------        BUILDING JCPLAYER PACKAGE    -----"/>
+    <echo message=""/>
+    <property name="year" value="2008"/>
+    <property name="jdksource" value="1.6"/>
+    <property name="jdktarget" value="1.6"/>    
+    <property name="jars" value="${basedir}"/>
+    <property name="sources" value="${basedir}/src"/>
+    <property name="classes" value="${basedir}/classes"/>  
+    <property name="api" value="${basedir}/docs"/>
+    <property name="lib" value="${basedir}/lib"/>
+  </target>
+
+  <!-- Build -->
+  <target name="build" depends="init">
+    <echo message="------ Compiling application"/>
+    <copy todir="${classes}">
+            <fileset dir="${sources}">
+                <include name="**/*.html"/>
+                <include name="**/COPYING"/>
+                <include name="**/*.txt"/>                
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+                <include name="**/*.png"/>
+            </fileset>
+     </copy>
+    <javac srcdir="${sources}" destdir="${classes}" includes="**" source="${jdksource}" target="${jdktarget}" debug="on">
+    <!--javac srcdir="${sources}" destdir="${classes}" includes="**" source="${jdksource}" target="${jdktarget}"-->
+      <classpath>            
+        <pathelement location="${lib}/basicplayer3.0.jar"/>        
+      </classpath>
+    </javac>
+  </target>
+  
+  <!-- Run -->
+     <target name="run" depends="build" description="Run JCPlayer">
+	<java classname="com.johncheetham.jcplayer.JCPlayer" dir="." fork="true" classpath="classes:lib/basicplayer3.0.jar:lib/commons-logging-api.jar:lib/mp3spi1.9.4.jar:lib/jflac-1.2.jar:lib/tritonus_share.jar:lib/jl1.0.jar:lib/vorbisspi1.0.2.jar:lib/jorbis-0.0.15.jar:lib/jogg-0.0.7.jar">            
+	</java>
+      </target>
+
+  <!-- Archive -->
+  <target name="dist" depends="build">
+    <echo message="------ Building JAR file"/>
+  <jar jarfile="${jars}/JCPlayer.jar">
+      <manifest>
+        <attribute name="Created-By" value="John Cheetham" />
+	<attribute name="Main-Class" value="com.johncheetham.jcplayer.JCPlayer" />
+	<attribute name="Class-Path" value="lib/basicplayer3.0.jar lib/commons-logging-api.jar lib/mp3spi1.9.4.jar lib/jflac-1.2.jar lib/tritonus_share.jar lib/jl1.0.jar lib/vorbisspi1.0.2.jar lib/jorbis-0.0.15.jar lib/jogg-0.0.7.jar"/>	
+      </manifest>
+    <fileset dir="${classes}" />
+  </jar> 
+  <delete dir="${build}" />
+  </target>
+  
+   <!-- JavaDoc -->
+  <target name="all" depends="dist">
+     <echo message="------ Running JavaDoc"/>
+     <javadoc packagenames="com.johncheetham.*"
+              sourcepath="${sources}"
+              destdir="${api}"
+              bottom="John Cheetham ${year}">
+      <classpath>
+        <pathelement location="${classes}"/>
+	<pathelement location="${lib}/basicplayer3.0.jar"/>        
+      </classpath>
+     </javadoc>
+  </target>
+ 
+</project>
+

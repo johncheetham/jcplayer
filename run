@@ -1,0 +1,3 @@
+#!/bin/sh
+java -cp classes:lib/basicplayer3.0.jar:lib/commons-logging-api.jar:lib/mp3spi1.9.4.jar:lib/jflac-1.2.jar:lib/tritonus_share.jar:lib/jl1.0.jar:lib/vorbisspi1.0.2.jar:lib/jorbis-0.0.15.jar:lib/jogg-0.0.7.jar com.johncheetham.jcplayer.JCPlayer
+

@@ -1,0 +1,39 @@
+JCPlayer 0.1.9
+John Cheetham August 2008
+
+Project Homepage : http://www.johncheetham.com/projects/jcplayer
+email : developer@johncheetham.com
+
+JCPlayer uses various libraries including:
+
+    JLayer - http://www.javazoom.net.
+    JOrbis - http://www.jcraft.com/jorbis/index.html
+    Jflac  - http://jflac.sourceforge.net/
+
+
+Description
+-----------
+JCPlayer is an audio file player written in Java. It will play mp3, flac, ogg and wav files.
+It is licensed under the GPL (see the file named COPYING).
+
+
+Requirements
+------------
+Sun's java version 1.6 (also known as java 6) or above.
+
+
+Installation
+------------
+Unzip the JCPlayer zip file into a suitable directory.
+To run the program run the 'runjar' script on linux/unix or win.bat on windows.
+
+
+Troubleshooting
+---------------
+The most likely problem is java not installed correctly.
+It can be installed from http://java.sun.com.
+Download the latest version in the Java SE section.
+Try typing "java -version". It should report java version "1.6.0_05" or similar.
+
+
+
